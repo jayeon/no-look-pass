@@ -3,6 +3,7 @@ package passwordmanager;
 public class Driver {
 	public static void main(String[] args) {
 		PasswordAssessor assessor = new PasswordAssessor();
+		PasswordGenerator generator = new PasswordGenerator();
 
 		String goodPassword = "Espresso43624!";
 		String okPassword = "Espresso43624";
@@ -17,5 +18,9 @@ public class Driver {
 		
 		System.out.println(assessor.assessPassword(unacceptablePassword));
 		System.out.println(assessor.assessPassword(badPassword));
+		
+		System.out.println(generator.generatePassword());
+		System.out.println(generator.generatePassword());
+		System.out.println(generator.generatePassword());
 	}
 }
