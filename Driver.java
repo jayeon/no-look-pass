@@ -11,6 +11,10 @@ public class Driver {
 		
 		String unacceptablePassword = "12345";
 		String badPassword = "qwerty";
+		
+		String strongPassword = generator.generatePassword();
+		String strongPassword2 = generator.generatePassword();
+		String strongPassword3 = generator.generatePassword();
 
 		System.out.println(assessor.assessPassword(goodPassword));
 		System.out.println(assessor.assessPassword(okPassword));
@@ -19,8 +23,8 @@ public class Driver {
 		System.out.println(assessor.assessPassword(unacceptablePassword));
 		System.out.println(assessor.assessPassword(badPassword));
 		
-		System.out.println(generator.generatePassword());
-		System.out.println(generator.generatePassword());
-		System.out.println(generator.generatePassword());
+		System.out.println("password: " + strongPassword + "password strength: " + assessor.assessPassword(strongPassword));
+		System.out.println("password: " + strongPassword2 + "password strength: " + assessor.assessPassword(strongPassword2));
+		System.out.println("password: " + strongPassword3 + "password strength: " + assessor.assessPassword(strongPassword3));
 	}
 }
