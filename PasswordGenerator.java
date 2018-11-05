@@ -11,6 +11,7 @@ public class PasswordGenerator {
 	
 	public String generatePassword() {
 		String strongPassword = "";
+		//randomly generates password length between 12 and 16
 		int passwordLength = (int) (Math.random() * 5 + 12); //returns a minimum of 12
 		
 		String lowerCase = "abcdefghijklmnopqrstuvwxyz";
@@ -18,6 +19,8 @@ public class PasswordGenerator {
 		String integers = "0123456789";
 		String specialCharacters = "!" + "\"" + "#$%&" + "\'" + "()*,+-./:\\;<=>?@[\\]^_`{|}~";		
 		
+		
+		//generates a random combination of letters, numbers and special characters
 		for (int i = 0; i < passwordLength; i++) {
 			int a = (int) (Math.random() * 3); //generates a number between 0 and 2
 			if (a == 0) {
@@ -37,6 +40,7 @@ public class PasswordGenerator {
 			}
 		}
 		
+		//method generates a new strong password if its strength is not the maximum possible (7)
 		if (assessor.assessPassword(strongPassword) == 7) {
 			return strongPassword;
 		} else {

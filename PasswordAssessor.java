@@ -4,11 +4,18 @@ import java.util.regex.*;
 
 /* 
  * Method returns a score rating the strength of a password
- * Score increase by one for meeting certain criteria like length above eight characters,
- * use of non-repeating characters and a mix of numbers, letters and special characters
+ * With 0 indicating the weakest password and 7 the strongest possible
+ * 
+ * The criteria include the following like 1) length above eight characters,
+ * 2) use of non-repeating characters 3) use of non-repeating numbers
+ * 4) use of both lower and uppercase
+ * 5) and a mix of numbers, letters and special characters
  * 
  * The method returns a score of 0 for unacceptable passwords like the following:
- * password shorter than eight characters, common passwords
+ * 1) password shorter than eight characters, 2) common passwords
+ * 
+ * The list of common passwords comes from the following article: 
+ * http://fortune.com/2017/12/19/the-25-most-used-hackable-passwords-2017-star-wars-freedom/
  * 
  * */
 	
@@ -20,6 +27,11 @@ public class PasswordAssessor {
 		"trustno1", "654321", "jordan23", "password1", "1234", "robert", "matthew",
 		"jordan", "asshole", "daniel"};
 
+	/**
+	 * Uses regex to search the password for numbers
+	 * @param password
+	 * @return boolean
+	 */
 	public boolean containsNumbers(String password) {
 		Pattern numbers = Pattern.compile("\\d");
 		Matcher matcher = numbers.matcher(password);
@@ -30,6 +42,11 @@ public class PasswordAssessor {
 		}
 	}
 	
+	/**
+	 * Uses regex to search the password for special characters
+	 * @param password
+	 * @return boolean
+	 */
 	public boolean containsSpecialCharacters(String password) {
 		Pattern specialCharacters = Pattern.compile("\\W");
 		Matcher matcher = specialCharacters.matcher(password);
@@ -40,6 +57,11 @@ public class PasswordAssessor {
 		}
 	}
 	
+	/**
+	 * Uses regex to search the password for letters, including uppercase and lowercase letters
+	 * @param password
+	 * @return boolean
+	 */
 	public boolean containsLetters(String password) {
 		Pattern letters = Pattern.compile("(?i)[a-z]");
 		Matcher matcher = letters.matcher(password);
@@ -50,6 +72,11 @@ public class PasswordAssessor {
 		}
 	}
 	
+	/**
+	 * Uses regex to search password to see whether it contains both upper and lowercase letters
+	 * @param password
+	 * @return boolean
+	 */
 	public boolean containsUpperandLowerCase(String password) {
 		Pattern upperCase = Pattern.compile("[A-Z]");
 		Pattern lowerCase = Pattern.compile("[a-z]");
@@ -62,7 +89,11 @@ public class PasswordAssessor {
 		}
 	}
 	
-	//looks for red flags
+	/**
+	 * Uses regex to search the password for consecutive integers like "123" or "987"
+	 * @param password
+	 * @return boolean
+	 */
 	public boolean hasConsecutiveNumbers(String password) {
 		Pattern numbersAscending = Pattern.compile("(098|987|876|765|654|543|432|321|210)");
 		Pattern numbersDescending = Pattern.compile("(123|234|345|456|567|678|789|890)");
@@ -75,8 +106,13 @@ public class PasswordAssessor {
 		}
 	}
 	
+	/**
+	 * Uses regex to search for passwords for letters that repeat three times or more
+	 * @param password
+	 * @return boolean
+	 */
 	public boolean hasRepeatingCharacters(String password) {
-		Pattern letters = Pattern.compile("(\\w)\\2+");
+		Pattern letters = Pattern.compile("(.)\\1{2,}");
 		Matcher matcher = letters.matcher(password);
 		if (matcher.find()) {
 			return true;
@@ -85,6 +121,11 @@ public class PasswordAssessor {
 		}
 	}
 	
+	/**
+	 * Uses regex to match the password with elements inside the commonPasswords array
+	 * @param password
+	 * @return boolean
+	 */
 	public boolean isCommonPassword(String password) {		
 		for (String commonPassword : commonPasswords) {
 			if (password.equals(commonPassword)) {
@@ -94,7 +135,11 @@ public class PasswordAssessor {
 		return false;
 	}
 	
-	//length	
+	/**
+	 * Checks to see whether the length of a password is eight or longer
+	 * @param password
+	 * @return
+	 */
 	public boolean eightOrLonger (String password) {
 		if (password.length() >= 8) {
 			return true;
@@ -103,6 +148,11 @@ public class PasswordAssessor {
 		}
 	}
 	
+	/**
+	 * Checks whether the length of a password is 12 or longer
+	 * @param password
+	 * @return boolean
+	 */
 	public boolean twelveOrLonger (String password) {
 		if (password.length() >= 12) {
 			return true;
@@ -111,6 +161,10 @@ public class PasswordAssessor {
 		}
 	}
 	
+	/**
+	 * @param password
+	 * @return int
+	 */
 	public int assessPassword(String password) {	
 		int passwordScore = 0;
 		
