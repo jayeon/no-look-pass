@@ -211,7 +211,7 @@ public class PasswordAssessor {
 	public String passwordStrength(String password) {
 		if (assessPassword(password) < 3) {
 			return "Password strength: weak";
-		} else if (assessPassword(password) >= 3 && assessPassword(password) < 5) {
+		} else if (assessPassword(password) >= 3 && assessPassword(password) <= 5) {
 			return "Password strength: medium";
 		} else {
 			return "Password strength: strong";
