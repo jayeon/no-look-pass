@@ -4,9 +4,33 @@ import java.net.*;
 import java.io.*;
 import java.util.*;
 
+/**
+ * @author jayeon
+ * The Watchtower class models the methods found in the Watchtower page
+ * of 1Password
+ * 
+ * The class contains three methods with the goal of checking repeat logins
+ * and checking that the website for which the login is stored is secure
+ * (whether it starts with https://)
+ *  
+ */
+
 public class Watchtower {
 	private Map<String, Integer> repeatPasswords = new HashMap<>();
 	
+	
+	/**
+	 * Identifies the number of times that a password is used twice or more
+	 * If password "Password123" is used three times,
+	 * then the method would return three.
+	 * 
+	 * The method stores passwords (or its encrypted version)
+	 * in a String-integer key everytime a login is added to the program
+	 * The integer increases by one if it is a repeat password
+	 * 
+	 * @param password
+	 * @return integer
+	 */
 	public int lookForRepeats(String password) {
 		repeatPasswords.put(password, repeatPasswords.getOrDefault(password, 0) + 1);
 		int repeats = 0;
@@ -18,7 +42,17 @@ public class Watchtower {
 		return repeats;
 	}
 	
-	public URL standardiseWebsite(String website) throws IOException, MalformedURLException {	
+	/**
+	 * The method adds a protocol (http://) or returns a redirect
+	 * if the entered website is missing a protocol or redirects 
+	 * (including redirect from http:// to https://)
+	 * 
+	 * @param website
+	 * @return URL
+	 * @throws IOException
+	 * @throws MalformedURLException
+	 */
+	private URL standardiseWebsite(String website) throws IOException, MalformedURLException {	
 		//check whether the website has a protocol
 		//adds if it is missing
 		if ((website.startsWith("https://") || website.startsWith("https://")) == false) {
@@ -45,6 +79,16 @@ public class Watchtower {
 		return site;
 	}
 	
+	/**
+	 * After a website is entered into standardiseWebsite() 
+	 * and has the right format, the method checks whether
+	 * the protocol equals "http://" or "https://"
+	 * 
+	 * @param website
+	 * @return
+	 * @throws IOException
+	 * @throws MalformedURLException
+	 */
 	public boolean checkUnsecure(String website) throws IOException, MalformedURLException {
 		URL site = standardiseWebsite(website);
 		if (site.getProtocol().equals("http")) {
