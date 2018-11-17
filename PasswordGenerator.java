@@ -6,10 +6,8 @@ package passwordmanager;
  * 3. The letters consist both of uppercase and lowercase characters
  * */
 
-public class PasswordGenerator {
-	PasswordAssessor assessor = new PasswordAssessor();
-	
-	public String generatePassword() {
+public class PasswordGenerator {	
+	public static String generatePassword() {
 		String strongPassword = "";
 		//randomly generates password length between 12 and 16
 		int passwordLength = (int) (Math.random() * 5 + 12); //returns a minimum of 12
@@ -18,8 +16,7 @@ public class PasswordGenerator {
 		String upperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 		String integers = "0123456789";
 		String specialCharacters = "!" + "\"" + "#$%&" + "\'" + "()*,+-./:\\;<=>?@[\\]^_`{|}~";		
-		
-		
+				
 		//generates a random combination of letters, numbers and special characters
 		for (int i = 0; i < passwordLength; i++) {
 			int a = (int) (Math.random() * 3); //generates a number between 0 and 2
@@ -41,7 +38,7 @@ public class PasswordGenerator {
 		}
 		
 		//method generates a new strong password if its strength is not the maximum possible (7)
-		if (assessor.assessPassword(strongPassword) == 7) {
+		if (PasswordAssessor.assessPassword(strongPassword) == 7) {
 			return strongPassword;
 		} else {
 			return generatePassword();
