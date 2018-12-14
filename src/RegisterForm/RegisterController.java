@@ -33,11 +33,31 @@ public class RegisterController implements Initializable
 private Connection conn;
 private Alert alert;
 
+    /**
+     *this is text for a privacy policy
+     * @param url
+     * @param rs
+     */
     public void initialize(URL url, ResourceBundle rs)
     {
 
+        Tooltip tooltip1 = new Tooltip();
+        tooltip1.setText("With any service, it is very important to think about your privacy.\n We believe strongly " +
+                "that your data is yours and we don’t want to know anything about it. \n" +
+                "This is one of the fundamental beliefs " +
+                "No-look-pass was built upon." +
+                "That’s why our privacy policy is simple: " +
+                "\n your data is your data. We don’t use it, we don’t share it, \n " +
+                "and we don’t sell it. You’re our customer, not our product." +
+                " \n Thank you for trusting us with your most important information. \n We won’t let you down.");
+        checkbox.setTooltip(tooltip1);
     }
-    ////code for registration
+
+    /**
+     *
+     * @param event
+     */
+    ////code for registration new user
         @FXML
         private void addNewUser(ActionEvent event)
         {
@@ -65,18 +85,18 @@ private Alert alert;
 
                 {
                     alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setHeaderText("MISSING SOME INFORMATION!");
+                    alert.setHeaderText("Missing some information!");
                     alert.initStyle(StageStyle.UNDECORATED);
-                    alert.getDialogPane().setBackground((new Background(new BackgroundFill(Color.RED, CornerRadii.EMPTY, Insets.EMPTY))));
+                    alert.getDialogPane().setBackground((new Background(new BackgroundFill(Color.TRANSPARENT, CornerRadii.EMPTY, Insets.EMPTY))));
                     alert.showAndWait();
 
                 }
                 else if (emailFormat!=true){
 
                     alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setHeaderText("EMAIL WRONG FORMAT!");
+                    alert.setHeaderText("Email wrong format!");
                     alert.initStyle(StageStyle.UNDECORATED);
-                    alert.getDialogPane().setBackground((new Background(new BackgroundFill(Color.DARKRED, CornerRadii.EMPTY, Insets.EMPTY))));
+                    alert.getDialogPane().setBackground((new Background(new BackgroundFill(Color.TRANSPARENT, CornerRadii.EMPTY, Insets.EMPTY))));
                     alert.showAndWait();
                 }
 ////////////
@@ -84,9 +104,9 @@ private Alert alert;
                 else if(comparePassword!=true) {
 
                     alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setHeaderText("PASSWORDS DO NOT MATCH!");
+                    alert.setHeaderText("Passwords do not match!");
                     alert.initStyle(StageStyle.UNDECORATED);
-                    alert.getDialogPane().setBackground((new Background(new BackgroundFill(Color.DEEPPINK, CornerRadii.EMPTY, Insets.EMPTY))));
+                    alert.getDialogPane().setBackground((new Background(new BackgroundFill(Color.TRANSPARENT, CornerRadii.EMPTY, Insets.EMPTY))));
                     alert.showAndWait();
 
                     //alert.getDialogPane().setStyle("-fx-background-color: #FFFFF");
@@ -96,9 +116,9 @@ private Alert alert;
                  else
                      if (checkbox.isSelected()) {
                     alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setHeaderText("REGISTRATION SUCCESFUL");
+                    alert.setHeaderText("Registration successful");
                     alert.initStyle(StageStyle.UNDECORATED);
-                    alert.getDialogPane().setBackground((new Background(new BackgroundFill(Color.GREEN, CornerRadii.EMPTY, Insets.EMPTY))));
+                    alert.getDialogPane().setBackground((new Background(new BackgroundFill(Color.TRANSPARENT, CornerRadii.EMPTY, Insets.EMPTY))));
                     alert.showAndWait();
                     Stage stage1 = (Stage) this.registernow.getScene().getWindow();
                     stage1.close();
@@ -106,9 +126,11 @@ private Alert alert;
 
                 else {
                     alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setHeaderText("PLESAE ACCEPT THR TERMS OF USE \n AND PRIVACY POLICY");
+                    alert.setHeaderText("Please accept terms of use \n and privacy policy");
                     alert.initStyle(StageStyle.UNDECORATED);
-                    alert.getDialogPane().setBackground((new Background(new BackgroundFill(Color.DEEPPINK, CornerRadii.EMPTY, Insets.EMPTY))));
+
+
+                    alert.getDialogPane().setBackground((new Background(new BackgroundFill(Color.TRANSPARENT, CornerRadii.EMPTY, Insets.EMPTY))));
 
                     //alert1.showAndWait();
                     Optional<ButtonType> result1 = alert.showAndWait();
@@ -122,6 +144,10 @@ private Alert alert;
             }
         }
 
+    /**
+     * close the window
+     * @param event
+     */
     @FXML
      private void closeRegistrationForm(ActionEvent event)
     {
@@ -131,6 +157,10 @@ private Alert alert;
     }
 
 
+    /**
+     * link to sign in
+     * @param event
+     */
     @FXML
     private void signInFromRegisterForm(ActionEvent event)
     {

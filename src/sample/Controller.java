@@ -34,12 +34,23 @@ public class Controller implements Initializable {
     @FXML
     private JFXPasswordField password;
 
+    /**
+     *
+     * @param url
+     * @param rb
+     */
 
     public void initialize(URL url, ResourceBundle rb) {
 
+
     }
 
-    //this will close the current window
+    /**
+     *
+     * @param event
+     */
+    //this will close the current window,
+    //show the alert box
     @FXML
     private void cancel(ActionEvent event) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -63,6 +74,12 @@ public class Controller implements Initializable {
 
     dbStatus db = new dbStatus();
 
+
+    /**
+     *
+     * @param event
+     * @throws Exception
+     */
     //check for credentials, login to your account, open another window
     @FXML
     private void logintoAccount(ActionEvent event) throws Exception {
@@ -110,13 +127,22 @@ public class Controller implements Initializable {
 
     }
 
+    /**
+     *
+     * @param event
+     */
     //change to MouseEvent if ActionEvent doesnt work
     @FXML
     private void forgotPassword(ActionEvent event) {
         //Code for resseting password
     }
 
-    //Register new user
+    /**
+     *
+     * @param event
+     * @throws IOException
+     */
+    //open a window for a new user
     @FXML
     private void SignUp(ActionEvent event) throws IOException {
         // Stage stage = (Stage) this.signup.getScene().getWindow();
